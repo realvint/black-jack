@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Interface
+module Interface
   def input_name
     puts 'Введите ваше имя:'
   end
@@ -20,7 +20,7 @@ class Interface
 
   def choice_menu
     puts
-    puts "Ваши карты: #{@player.hand}. Вас счёт: #{@player.score}. Ваш банк: $#{@player.bank}"
+    puts "Ваши карты: #{@player.hand.cards}. Ваш счёт: #{@player.hand.score}. Ваш банк: $#{@player.bank}"
     puts "Карты дилера [**, **]. Счёт дилера [**]. У дилера в банке: $#{@dealer.bank}"
     puts
     puts 'Введите 1, чтобы взять дополнительную карту'
@@ -39,11 +39,11 @@ class Interface
   end
 
   def show_player_info
-    puts "#{@player.name} ваши карты: #{@player.hand}, сумма очков: #{@player.score}"
+    puts "#{@player.name} ваши карты: #{@player.hand.cards}, сумма очков: #{@player.hand.score}"
   end
 
   def show_dealer_info
-    puts "У дилера #{@dealer.hand}, сумма очков: #{@dealer.score}"
+    puts "У дилера #{@dealer.hand.cards}, сумма очков: #{@dealer.hand.score}"
   end
 
   def dealer_ready_open

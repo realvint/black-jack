@@ -1,17 +1,11 @@
-require_relative 'interface'
+require_relative 'hand'
 
 class Player
-  attr_accessor :name, :bank, :hand, :score
+  attr_accessor :name, :bank, :hand
 
   def initialize(name)
     @name = name
     @bank = 100
-    @hand = []
-    @score = 0
-  end
-
-  def refresh
-    @hand = []
-    @score = 0
+    @hand = Hand.new
   end
 end
