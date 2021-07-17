@@ -22,7 +22,6 @@ class Interface
   def choice_menu(cards, score, player_bank, dealer_bank)
     puts
     puts "Ваши карты: #{cards}. Ваш счёт: #{score}. Ваш банк: $#{player_bank}"
-    # puts "Ваши карты: #{@player.hand.cards}. Ваш счёт: #{@player.hand.score}. Ваш банк: $#{@player.bank}"
     puts "Карты дилера [**, **]. Счёт дилера [**]. У дилера в банке: $#{dealer_bank}"
     puts
     puts 'Введите 1, чтобы взять дополнительную карту'
@@ -38,12 +37,10 @@ class Interface
 
   def show_player_info(name, cards, score)
     puts "#{name} ваши карты: #{cards}, сумма очков: #{score}"
-    # puts "#{@player.name} ваши карты: #{@player.hand.cards}, сумма очков: #{@player.hand.score}"
   end
 
   def show_dealer_info(cards, score)
     puts "У дилера #{cards}, сумма очков: #{score}"
-    # puts "У дилера #{@dealer.hand.cards}, сумма очков: #{@dealer.hand.score}"
   end
 
   def dealer_ready_open
@@ -53,7 +50,6 @@ class Interface
   def show_play_again_menu(bank)
     puts
     puts "У вас в банке: $#{bank}"
-    # puts "У вас в банке: $#{@player.bank}"
     puts
     puts 'Введите 1, чтобы сыграть еще раз'
     puts 'Введите 0, чтобы закончить игру'
@@ -62,13 +58,11 @@ class Interface
   def you_win(bank)
     puts
     puts "Вы победили и получили $20 в свой банк, теперь у вас есть: $#{bank}!"
-    # puts "Вы победили и получили $20 в свой банк, теперь у вас есть: $#{@player.bank}!"
   end
 
   def you_lost(bank)
     puts
     puts "Вы проиграли! У вас осталось $#{bank} в банке."
-    # puts "Вы проиграли! У вас осталось $#{@player.bank} в банке."
   end
 
   def max_cards

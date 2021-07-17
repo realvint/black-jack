@@ -12,8 +12,8 @@ class Deck
   end
 
   def create_card
-    @random_card = @deck[rand(@deck.length - 1)]
-    @deck.delete(@random_card)
+    @random_card = @deck.sample
+    @deck.delete(random_card)
   end
 
   def make_third_card

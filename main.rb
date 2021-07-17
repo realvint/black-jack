@@ -7,16 +7,15 @@ require_relative 'interface'
 
 class Main
 
-  def initialize
-    @interface = Interface.new
+  def initialize(interface)
+    @interface = interface
     @interface.input_name
-    @name = gets.chomp
-    @interface.alert if @name.empty?
-    @player = Player.new(@name)
+    name = gets.chomp
+    @interface.alert if name.empty?
+    @player = Player.new(name)
     @interface.greeting(@player.name)
     @dealer = Dealer.new('Dealer')
     @deck = Deck.new
-    self.start
   end
 
   def start
@@ -45,9 +44,9 @@ class Main
 
   def choose_turn
     @interface.choice_menu(@player.hand.cards, @player.hand.score, @player.bank, @dealer.bank)
-    @input = gets.chomp.to_i
-    action(@input)
-    raise choose_turn unless [0, 1, 2, 3].include?(@input)
+    input = gets.chomp.to_i
+    action(input)
+    raise choose_turn unless [0, 1, 2, 3].include?(input)
   end
 
   def action(input)
@@ -126,7 +125,8 @@ def refresh
   @player.hand.cards = []
 end
 
-Main.new
+interface = Interface.new
+Main.new(interface).start
 
 
 
