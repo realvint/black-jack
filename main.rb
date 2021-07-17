@@ -6,17 +6,17 @@ require_relative 'deck'
 require_relative 'interface'
 
 class Main
-  include Interface
 
-  def new_game
-    input_name
-    name = gets.chomp
-    alert if name.empty?
-    @player = Player.new(name)
-    greeting
+  def initialize
+    @interface = Interface.new
+    @interface.input_name
+    @name = gets.chomp
+    @interface.alert if @name.empty?
+    @player = Player.new(@name)
+    @interface.greeting(@player.name)
     @dealer = Dealer.new('Dealer')
     @deck = Deck.new
-    start
+    self.start
   end
 
   def start
@@ -38,14 +38,14 @@ class Main
     if user.bank > 10
       user.bank -= 10
     else
-      out_of_money
+      @interface.out_of_money
       exit
     end
   end
 
   def choose_turn
-    choice_menu
-    @input = input_choice
+    @interface.choice_menu(@player.hand.cards, @player.hand.score, @player.bank, @dealer.bank)
+    @input = gets.chomp.to_i
     action(@input)
     raise choose_turn unless [0, 1, 2, 3].include?(@input)
   end
@@ -56,27 +56,27 @@ class Main
     open_cards if input == 2
     if input == 1
       third_card(@player.name) if @player.hand.cards.size < 3
-      max_cards
+      @interface.max_cards
       dealer_turn
     end
   end
 
   def open_cards
-    show_player_info
-    show_dealer_info
+    @interface.show_player_info(@player.name, @player.hand.cards, @player.hand.score)
+    @interface.show_dealer_info(@dealer.hand.cards, @dealer.hand.score)
     if @dealer.hand.score == @player.hand.score
-      draw
+      @interface.draw
       @dealer.bank += 10
       @player.bank += 10
     elsif (@player.hand.score > 21) || (@dealer.hand.score > @player.hand.score && @dealer.hand.score <= 21)
       @dealer.bank += 20
-      you_lost
+      @interface.you_lost(@player.bank)
     else
       @player.bank += 20
-      you_win
+      @interface.you_win(@player.bank)
     end
-    show_play_again_menu
-    choice = input_choice
+    @interface.show_play_again_menu(@player.bank)
+    choice = gets.chomp.to_i
     if choice == 1
       start
     else
@@ -89,7 +89,7 @@ class Main
       @deck.create_card
       @player.hand.cards << @deck.random_card
       @player.hand.score = @player.hand.count(@player.hand.cards)
-      added_card
+      @interface.added_card
       dealer_turn
     else
       @deck.create_card
@@ -111,7 +111,7 @@ end
 
 def dealer_turn
   if @dealer.hand.score >= 17
-    dealer_ready_open
+    @interface.dealer_ready_open
     get_turn(nil)
   else
     @dealer.hand.score < 17 && @dealer.hand.cards.size < 3
@@ -126,7 +126,7 @@ def refresh
   @player.hand.cards = []
 end
 
-m = Main.new
-m.new_game
+Main.new
+
 
 

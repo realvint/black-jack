@@ -1,20 +1,19 @@
 require_relative 'card'
 
 class Deck
-  attr_accessor :cards, :random_card
-
-  CARD = %w[2 3 4 5 6 7 8 9 10 J Q K A].freeze
-  SUIT = %w[♠ ♥ ♣ ♦].freeze
+  attr_accessor :random_card
 
   def initialize
-    @cards = []
+    deck = []
+    Card::SUITS.each do |suit|
+      Card::CARDS.each { |value| deck << Card.new(value, suit) }
+    end
+    @deck = deck.shuffle
   end
 
   def create_card
-    @value = CARD.sample
-    @suit = SUIT.sample
-    @random_card = Card.new(@value, @suit)
-    # cards << random_card
+    @random_card = @deck[rand(@deck.length - 1)]
+    @deck.delete(@random_card)
   end
 
   def make_third_card
