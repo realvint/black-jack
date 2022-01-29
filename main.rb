@@ -43,7 +43,11 @@ class Main
   end
 
   def choose_turn
-    @interface.choice_menu(@player.hand.cards, @player.hand.score, @player.bank, @dealer.bank)
+    @interface.choice_menu({cards: @player.hand.cards,
+                            score: @player.hand.score,
+                            player_bank: @player.bank,
+                            dealer_bank: @dealer.bank
+                           })
     input = gets.chomp.to_i
     action(input)
     raise choose_turn unless [0, 1, 2, 3].include?(input)

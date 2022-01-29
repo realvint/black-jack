@@ -19,10 +19,10 @@ class Interface
     puts 'У вас недостаточно денег для продолжения игры. Вы самое слабое звено!'
   end
 
-  def choice_menu(cards, score, player_bank, dealer_bank)
+  def choice_menu(args)
     puts
-    puts "Ваши карты: #{cards}. Ваш счёт: #{score}. Ваш банк: $#{player_bank}"
-    puts "Карты дилера [**, **]. Счёт дилера [**]. У дилера в банке: $#{dealer_bank}"
+    puts "Ваши карты: #{args[:cards]}. Ваш счёт: #{args[:score]}. Ваш банк: $#{args[:player_bank]}"
+    puts "Карты дилера [**, **]. Счёт дилера [**]. У дилера в банке: $#{args[:dealer_bank]}"
     puts
     puts 'Введите 1, чтобы взять дополнительную карту'
     puts 'Введите 2, чтобы открыть карты'
