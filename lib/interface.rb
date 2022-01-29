@@ -3,6 +3,7 @@ class Interface
 
   def input_name
     puts 'Введите ваше имя:'
+    print '> '
   end
 
   def alert
@@ -21,13 +22,16 @@ class Interface
 
   def choice_menu(args)
     puts
-    puts "Ваши карты: #{args[:cards]}. Ваш счёт: #{args[:score]}. Ваш банк: $#{args[:player_bank]}"
+    print 'Ваши карты: '
+    args[:cards].each(&method(:print))
+    puts "Ваш счёт: #{args[:score]}. Ваш банк: $#{args[:player_bank]}"
     puts "Карты дилера [**, **]. Счёт дилера [**]. У дилера в банке: $#{args[:dealer_bank]}"
     puts
     puts 'Введите 1, чтобы взять дополнительную карту'
     puts 'Введите 2, чтобы открыть карты'
     puts 'Введите 3, чтобы пропустить ход'
     puts 'Введите 0, чтобы закончить игру'
+    print '> '
   end
 
   def added_card
@@ -36,11 +40,15 @@ class Interface
   end
 
   def show_player_info(name, cards, score)
-    puts "#{name} ваши карты: #{cards}, сумма очков: #{score}"
+    print "#{name} ваши карты: "
+    cards.each(&method(:print))
+    puts "Ваша сумма очков: #{score}"
   end
 
   def show_dealer_info(cards, score)
-    puts "У дилера #{cards}, сумма очков: #{score}"
+    print 'У дилера: '
+    cards.each(&method(:print))
+    puts "Cумма очков: #{score}"
   end
 
   def dealer_ready_open

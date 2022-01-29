@@ -8,4 +8,8 @@ class Card
     @value = value
     @suit = suit
   end
+
+  def to_s
+    "#{@value}#{@suit} "
+  end
 end
