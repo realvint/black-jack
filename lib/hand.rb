@@ -18,4 +18,3 @@ class Hand
     result
   end
 end
-

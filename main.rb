@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative 'player'
-require_relative 'dealer'
-require_relative 'deck'
-require_relative 'interface'
+require_relative 'lib/player'
+require_relative 'lib/dealer'
+require_relative 'lib/deck'
+require_relative 'lib/interface'
 
 class Main
 
@@ -127,6 +127,3 @@ end
 
 interface = Interface.new
 Main.new(interface).start
-
-
-
