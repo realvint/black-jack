@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-class Interface
 
+class Interface
   def input_name
     puts 'Введите ваше имя:'
     print '> '

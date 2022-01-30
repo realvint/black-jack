@@ -6,7 +6,6 @@ require_relative 'lib/deck'
 require_relative 'lib/interface'
 
 class Main
-
   def initialize(interface)
     @interface = interface
     @interface.input_name
@@ -33,7 +32,7 @@ class Main
     choose_turn
   end
 
-  def make_bet (user)
+  def make_bet(user)
     if user.bank > 10
       user.bank -= 10
     else
@@ -63,6 +62,7 @@ class Main
   def open_cards
     @interface.show_player_info(@player.name, @player.hand.cards, @player.hand.score)
     @interface.show_dealer_info(@dealer.hand.cards, @dealer.hand.score)
+
     if @dealer.hand.score == @player.hand.score
       @interface.draw
       @dealer.bank += 10
@@ -74,8 +74,11 @@ class Main
       @player.bank += 20
       @interface.you_win(@player.bank)
     end
+
     @interface.show_play_again_menu(@player.bank)
+
     choice = gets.chomp.to_i
+
     if choice == 1
       start
     else
@@ -84,14 +87,13 @@ class Main
   end
 
   def third_card(name)
+    @deck.create_card
     if name == @player.name
-      @deck.create_card
       @player.hand.cards << @deck.random_card
       @player.hand.score = @player.hand.count(@player.hand.cards)
       @interface.added_card
       dealer_turn
     else
-      @deck.create_card
       @dealer.hand.cards << @deck.random_card
       @dealer.hand.score = @dealer.hand.count(@dealer.hand.cards)
 

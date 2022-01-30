@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'card'
 
 class Deck
@@ -5,9 +7,11 @@ class Deck
 
   def initialize
     deck = []
+
     Card::SUITS.each do |suit|
       Card::CARDS.each { |value| deck << Card.new(value, suit) }
     end
+
     @deck = deck.shuffle
   end
 
